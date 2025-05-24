@@ -1,0 +1,22 @@
+--- 
+ - name: Implimenting Tags
+   hosts: all
+   gather_facts: false
+   become: yes
+   tasks: 
+      - name: Install Tree
+        apt:
+          name: tree
+          state: present
+          update_cache: yes
+        tags: tree_installation
+      - name: Create User
+        user: 
+          name: ramu  
+          password: password
+        tags: user_creation
+      - name: Copy passwd file
+        copy:
+          src: /etc/passwd
+          dest: /home/ubuntu
+...            
