@@ -1,0 +1,21 @@
+---
+- name: Implimentation of Looping
+  hosts: all
+  tasks: 
+    - name: Creating User
+      user: 
+        name: "{{item.a}}"
+        password: "{{item.b}}"
+        home: "{{item.c}}"
+      with_items:
+        - {a: ravi,b: password,c: /home/ravi}
+        - {a: anu, b: password,c: /home/anu} 
+
+    - name: Copy files to home directory of the users
+      copy:
+        src: "{{item.a}}"
+        dest: "{{item.b}}"
+      with_items:
+        - {a: /etc/passwd,b: /home/ravi}
+        - {a: /etc/group,b: /home/anu}
+...          

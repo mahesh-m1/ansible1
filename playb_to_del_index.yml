@@ -1,0 +1,9 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+    - name: Delete the file
+      ansible.builtin.file:
+        path: /var/www/html/index.html  
+        state: absent
+...
