@@ -2,7 +2,7 @@
 - name: Implimenting loops
   hosts: all
   tasks:
-    - name: Install, Unindtsll, Upgrsde S/w's
+    - name: Install, Uninstall, Upgrsde S/w's
       apt:
         name: "{{item.a}}"
         state: "{{item.b}}"
