@@ -1,0 +1,11 @@
+---
+- name: Check URL response on all the nodes
+  uri:
+    url: "{{item}}"
+    status_code: 200
+  with_items:
+    - http://172.31.24.13
+    - http://172.31.20.12
+  notify: Restart apache2
+      
+...    
