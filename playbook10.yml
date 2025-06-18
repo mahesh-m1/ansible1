@@ -1,0 +1,13 @@
+---
+- name: Implimentin Host scope variable on a Single Server
+  hosts: 172.31.24.13
+  tasks:
+    - name: User Creation
+      user: 
+        name: "{{a}}"
+        password: "{{b}}"
+        home: "{{c}}"
+        uid: "{{d}}"
+        comment: "{{e}}"
+        shell: "{{f}}"
+...                                                                                                                     

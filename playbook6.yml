@@ -1,0 +1,10 @@
+---
+- name: Install / Uninstall Softwares using Global Variables
+  hosts: all
+  tasks: 
+    - name: Install uninstall Softwares
+      apt:
+        name: "{{a}}"
+        state: "{{b}}"
+        update_cache: "{{c}}"
+...          

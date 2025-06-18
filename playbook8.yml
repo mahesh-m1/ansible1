@@ -1,0 +1,16 @@
+---
+- name: Implimenting Playscope Vaiables
+  hosts: all
+  vars:
+    a: tomcat10
+    b: present
+    c: yes
+    d: yes  
+  tasks:
+    - name: Installing tomcat 
+      apt:
+        name: "{{a}}"
+        state: "{{b}}"
+        update_cache: "{{c}}"
+        become: "{{d}}"
+...          

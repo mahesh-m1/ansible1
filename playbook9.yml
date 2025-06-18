@@ -1,0 +1,10 @@
+---
+- name: Using Host scope Variables
+  hosts: servers
+  tasks:
+    - name: Install Firewall
+      apt:
+        name: "{{a}}"
+        state: "{{b}}"
+        update_cache: "{{c}}"
+...

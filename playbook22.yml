@@ -1,0 +1,16 @@
+---
+- name: Install GIT based on the linux flavours
+  hosts: all
+  tasks:
+    - name: Install GIT on ubuntu nodes
+      apt:
+        name: git
+        state: present
+        update_cache: yes
+      when: ansible_distribution == 'Ubuntu'
+    - name: Install GIT on CentOS/RHEL nodes
+      yum:
+        name: git
+        state: present
+        update_cache: yes
+      when: ansible_distribution == "Amazon"    

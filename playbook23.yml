@@ -1,0 +1,44 @@
+---
+- name: Configuring Apache2 / Httpd
+  hosts: all
+  tasks:
+    - name: Install Apache2 on Ubuntu Nodes
+      apt:
+        name: apache2
+        state: present
+        update_cache: yes
+      when: ansible_distribution == 'Ubuntu'
+    - name: Install Httpd on CentOS/RHEL Nodes
+      yum: 
+        name:  httpd
+        state: present
+        update_cache: yes
+      when: ansible_distribution == 'Amazon'
+    - name: Edit Index.html file
+      copy:
+        content: "Hello World"
+        dest: /var/www/html/index.html
+    - name: Restart apache2 on Ubuntu Nodes
+      service:
+        name: apache2
+        state: restarted
+      when: ansible_distribution == 'Ubuntu'
+    - name: Restart httpd on CentOS/RHEL Nodes
+      service:
+        name: httpd
+        state: restarted    
+      when: ansible_distribution == 'Amazon'    
+    - name: check apache response on All Nodes
+      uri:
+        url: "{{item}}"
+        status_code: 200
+      with_items:
+        - http://172.31.24.13
+        - http://172.31.20.12
+      # - http://172.31.44.106
+          
+...
+
+
+
+

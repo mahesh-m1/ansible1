@@ -1,0 +1,16 @@
+---
+- name: Implimenting loops
+  hosts: all
+  tasks:
+    - name: Install S/w's
+      apt:
+        name: "{{item}}"
+        state: present
+        update_cache: yes
+      with_items:
+        - tree
+        - git
+        - maven
+...          
+
+    

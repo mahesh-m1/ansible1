@@ -1,0 +1,21 @@
+---
+- name: Installing apache2 Software
+  become: true
+  hosts: all
+  gather_facts: no
+  tasks: 
+    - name: Installing Apache2
+      apt:
+        name: apache2
+        state: present
+        update_cache: yes
+    - name: Checking the Apache2 response on the Nodes
+      uri: 
+        url: "{{item}}"
+        status_code: 200
+      with_items:
+          - http://172.31.24.13
+          - http://172.31.20.12
+...    
+ 
+

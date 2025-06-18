@@ -1,0 +1,13 @@
+---
+- name: Implimenting When Conditions
+  hosts: all
+  gather_facts: no
+  vars:
+     a: 10
+  tasks: 
+    - name: Create user
+      user:
+        name: Raja
+        password: Passwd
+      when: a == 10
+...        
