@@ -16,7 +16,7 @@
         src: tomcat-users.xml
         dest: /etc/tomcat10
     - name: Change port of Tomcat10 from 8080 to 9090
-      replace:
+        replace:
         regexp: 8080
         replace: 9090
         path: /etc/tomcat10/server.xml
