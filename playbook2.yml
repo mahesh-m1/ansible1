@@ -7,10 +7,12 @@
         name: apache2
         state: present
         update_cache: yes
-          #- name: Edit Index.html file
-          #copy:
-          #content: "Hello World"
-          #dest: /var/www/html/index.html
+
+    - name: Edit index.html file
+      copy:
+        content: "Hello World"
+        dest: /var/www/html/index.html
+
     - name: Restart apache2
       service:
         name: apache2
