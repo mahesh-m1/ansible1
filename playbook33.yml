@@ -1,0 +1,41 @@
+---
+- name: Configuring Tomcat10 on all Manager Nodes
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Installing tomcat10 & tomcat10-admin...
+      apt:
+        name: "{{item.a}}"
+        state: "{{item.b}}"
+        update_cache: "{{item.c}}"
+      with_items:
+        - {a: tomcat10, b: present,c: yes}
+        - {a: tomcat10-admin,b: present,c: no}
+
+    - name: Copying tomcat-users.xml file
+      copy:
+        src: /home/ubuntu/playbooks/tomcat-users.xml
+        dest: /etc/tomcat10
+    
+    - name: Changing the port of Tomcat server from 8080 to 9090 on all nodes
+      replace:
+        regexp: 8080
+        replace: 9090
+        path: /etc/tomcat10/server.xml
+   
+    - name: Restarting tomcat service now....
+      service:
+        name: tomcat10
+        state: restarted
+
+    - name: Pause the process until the tomcat service is up and running
+      pause:
+        seconds: 20
+
+    - name: Check tomcat response on all the nodes.
+      uri:
+        url: "{{item}}"
+        status_code: 200
+      with_items:
+        - http://172.31.22.88:9090
+        - http://172.31.27.253:9090    
